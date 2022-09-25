@@ -1,3 +1,10 @@
+// get only unique categories - HARDEST ONE
+// iterate over categories return buttons
+// make sure to select buttons when they are available
+
+
+
+// items
 const menu = [
   {
     id: 1,
@@ -88,6 +95,20 @@ const btnContainer = document.querySelector(".btn-container");
 // display all items when page loads
 window.addEventListener("DOMContentLoaded", function() {
   displayMenuItems(menu);
+
+  const categories = menu.reduce(function(values, item) {
+    if(!values.includes(item.category)) {
+      values.push(item.category);
+    }
+    return values
+  },
+  ['all'])
+  const categoryBtn = categories.map(function(category) {
+    return `<button type="button" class="filter-btn" data-id=${category}>
+      ${category}
+    </button>`;
+  }).join("");
+  btnContainer.innerHTML = categoryBtn;
 });
 
 // Filter items
