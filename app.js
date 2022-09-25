@@ -82,11 +82,29 @@ const menu = [
 ];
 // get parent element
 const sectionCenter = document.querySelector(".section-center");
+const filterBtns = document.querySelectorAll(".filter-btn");
 const btnContainer = document.querySelector(".btn-container");
 
 // display all items when page loads
 window.addEventListener("DOMContentLoaded", function() {
   displayMenuItems(menu);
+});
+
+// Filter items
+filterBtns.forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    const category = e.currentTarget.dataset.id;
+    const menuCategory = menu.filter(function (menuItem) {
+      if(menuItem.category === category) {
+        return menuItem;
+      }
+    });
+    if(category === 'all') {
+      displayMenuItems(menu);
+    } else {
+      displayMenuItems(menuCategory)
+    }
+  });
 });
 
 function displayMenuItems(menuItems) {
